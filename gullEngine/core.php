@@ -94,8 +94,8 @@
    }
    
    //возврашает контент
-   function AssemblyContent(){
-   	 return '<div class="row" id=siteContent></div>';
+   function AssemblyContent($content){
+   	 return "<div class=\"row align-items-center justify-content-center\" id=siteContent>{$content}</div>";
    }
    //принимает текст для копирайтинга и масив картинов с сылками
     //возврашает футер
@@ -206,7 +206,7 @@
    }
    
  //собирает сайт
-   function FullAsembly($logo,$menuArray,$cpy,$footerArray,$inactiveMeny,$mod){
+   function FullAsembly($logo,$menuArray,$cpy,$content,$footerArray,$inactiveMeny,$mod){
    	 echo siteHeader($mod);
    	 echo '<body>';
      
@@ -214,7 +214,9 @@
 
    	 echo'<div  id="siteBody" class="container" >';
    	 echo AssemblyMenu($menuArray,$inactiveMeny,$mod);
-   	 echo AssemblyContent();
+
+   	 echo AssemblyContent($content);
+
    	 echo AssemblyFooter($footerArray,$cpy,$mod);
      if($mod==1){
       echo generateModal();
