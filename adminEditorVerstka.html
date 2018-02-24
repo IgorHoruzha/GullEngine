@@ -16,7 +16,7 @@
 </head>
 <body>
 	<img src="image/logo.png" id="logo"/>
-	<button type="button" class="btn btn-warning" id="editLogo">Edit</button>
+	<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#logoEditModale"  data-whatever="@mdo" id="editLogo">Edit</button>
 	<div  id="siteBody" class="container" >
 
 		<nav class="navbar navbar-expand-lg navbar-light ">
@@ -37,7 +37,8 @@
 		        <a class="nav-link disabled" href="#">Disabled</a>
 		      </li>
 		      <li class="nav-item">
-		        <img class="socialImg" src="image/adminEditor/addPlus.png" id="addMenu">
+		      	
+		        <img data-toggle="modal" data-target="#addMenuButon"  data-whatever="@mdo" class="socialImg" src="image/adminEditor/addPlus.png" id="addMenu">
 		      </li>
 		    </ul>
 		  </div>
@@ -50,21 +51,101 @@
 		</div>
 
 		<div class="container row" id="footer">                   
-             <div id="copyrite" class="container container col-md-3"><button type="button" class="btn btn-warning" id="editCopyrite">Edit</button>Copyright © 2017</div>
+             <div id="copyrite" class="container container col-md-3"><button type="button" class="btn btn-warning"  data-toggle="modal" data-target="#copyrightModale"  data-whatever="@mdo" id="editCopyrite">Edit</button>Copyright © 2017</div>
              <div id="social" class="container container col-md-8">
              	<div class="container">
 	             	<div class="socialButton"><a href="https://vk.com"><img class="socialImg" src="image/socialImages/vk.png"></a></div>
 	                <div class="socialButton"><a href="https://www.facebook.com"><img class="socialImg" src="image/socialImages/facebook.png"></a></div>
 	                <div class="socialButton"><a href="https://twitter.com"><img class="socialImg" src="image/socialImages/twiter.png"></a></div>
-	                <div class="socialButton"><img class="socialImg" src="image/adminEditor/addPlus.png" id="addSocial"></div>
+	                <div class="socialButton"><img class="socialImg" data-toggle="modal" data-target="#addSocialButton"  data-whatever="@mdo" src="image/adminEditor/addPlus.png" id="addSocial"></div>
                 </div>
              </div>
-		</div>  
-		
+		</div>  	
+
+	</div>
+
+	<div class="modal"  id="copyrightModale"  tabindex="0" role="dialog">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title">Enter copyright</h5>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                    <span aria-hidden="true">&times;</span>
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	                <input type="text" class="form-control" placeholder="You copyright" id="copyrightInput">
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-primary">Save changes</button>
+	                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	            </div>
+	        </div>
+		</div>
+	</div>
+
+	<div class="modal"  id="logoEditModale"  tabindex="1" role="dialog">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title">Enter copyright</h5>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                    <span aria-hidden="true">&times;</span>
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	                <input type="file" class="form-control" name="attachment" id="logoImage">
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-primary">Save changes</button>
+	                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	            </div>
+	        </div>
+		</div>
+	</div>
+
+	<div class="modal"  id="addSocialButton"  tabindex="2" role="dialog">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title">Enter copyright</h5>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                    <span aria-hidden="true">&times;</span>
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	                 <input type="file" class="form-control" name="attachment" id="socialImage">
+	                 <input type="text" class="form-control" placeholder="Social Link" id="menuLinkInput">
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-primary">Save changes</button>
+	                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	            </div>
+	        </div>
+		</div>
 	</div>
 
 
-	
+	<div class="modal"  id="addMenuButon"  tabindex="3" role="dialog">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title">Enter copyright</h5>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                    <span aria-hidden="true">&times;</span>
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	                <input type="text" class="form-control" placeholder="Menu Name" id="menuLinkInput">
+	                <input type="text" class="form-control" placeholder="Menu Link" id="menuLinkInput">
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-primary">Save changes</button>
+	                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	            </div>
+	        </div>
+		</div>
+	</div>
 
 </body>
 </html>
