@@ -100,7 +100,11 @@
     //возврашает футер
    function AssemblyFooter($imgObject,$copyright,$type){
    	 $rt='<div class="container row" id="footer"> 
-         <div id="copyrite" class="container container col-md-3"> <button type="button" class="btn btn-warning"  data-toggle="modal" data-target="#copyrightModale"  data-whatever="@mdo" id="editCopyrite">Edit</button>'.$copyright.'</div>
+         <div id="copyrite" class="container container col-md-3">';
+         if($type=="1"){
+           $rt.='<button type="button" class="btn btn-warning"  data-toggle="modal" data-target="#copyrightModale"  data-whatever="@mdo" id="editCopyrite">Edit</button>';
+         }
+         $rt.=''.$copyright.'</div>
              <div id="social" class="container container col-md-8">
              	<div class="container">';
            foreach ($imgObject as  $value) {
