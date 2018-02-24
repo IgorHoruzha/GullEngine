@@ -1,8 +1,12 @@
 body{
-    
+   background-size: cover;
    background-image:url(../image/background.jpg);
    background-repeat: no-repeat; 
-   background-size: 100%;
+   height: fit-content;
+
+}
+html{
+	 height: fit-content;
 }
 #logo{
     top: 30px;
@@ -12,7 +16,7 @@ body{
 }
  @media screen and (max-device-width: 620px) {
     #logo {
-    	top: 10px;;
+    	top: 10px;
     }
    }
 #siteBody{
