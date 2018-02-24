@@ -17,6 +17,6 @@ $footArray[2] = array("link"=>"https://twitter.com","image"=>"../image/socialIma
 $cpy = "Copyright © 2017";
 
 //поехали!
-FullAsembly($logo, $menuArray,$cpy, $footArray,1);
+FullAsembly($logo, $menuArray,$cpy, $footArray,0,'1');
 
 ?>

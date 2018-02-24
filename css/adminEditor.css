@@ -26,5 +26,10 @@
     top: 7%;
     left: calc(50% + 90px);
 }
-
+#copyrightInput{
+	margin: auto;
+}
+#menuLinkInput{
+	margin-top: 15px;
+}
 
