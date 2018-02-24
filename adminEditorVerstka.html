@@ -9,13 +9,14 @@
 
 	  <link href="css/bootstrap.min.css" rel="stylesheet">
 	  <link href="css/style.css" rel="stylesheet">
-
+      <link href="css/adminEditor.css" rel="stylesheet">
 	  <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 	  <script src="js/bootstrap.min.js"></script>
 
 </head>
 <body>
 	<img src="image/logo.png" id="logo"/>
+	<button type="button" class="btn btn-warning" id="editLogo">Edit</button>
 	<div  id="siteBody" class="container" >
 
 		<nav class="navbar navbar-expand-lg navbar-light ">
@@ -35,6 +36,9 @@
 		      <li class="nav-item active">
 		        <a class="nav-link disabled" href="#">Disabled</a>
 		      </li>
+		      <li class="nav-item">
+		        <img class="socialImg" src="image/adminEditor/addPlus.png" id="addMenu">
+		      </li>
 		    </ul>
 		  </div>
 
@@ -46,16 +50,19 @@
 		</div>
 
 		<div class="container row" id="footer">                   
-             <div id="copyrite" class="container container col-md-3">Copyright © 2017</div>
+             <div id="copyrite" class="container container col-md-3"><button type="button" class="btn btn-warning" id="editCopyrite">Edit</button>Copyright © 2017</div>
              <div id="social" class="container container col-md-8">
              	<div class="container">
 	             	<div class="socialButton"><a href="https://vk.com"><img class="socialImg" src="image/socialImages/vk.png"></a></div>
 	                <div class="socialButton"><a href="https://www.facebook.com"><img class="socialImg" src="image/socialImages/facebook.png"></a></div>
 	                <div class="socialButton"><a href="https://twitter.com"><img class="socialImg" src="image/socialImages/twiter.png"></a></div>
-	  
+	                <div class="socialButton"><img class="socialImg" src="image/adminEditor/addPlus.png" id="addSocial"></div>
+                </div>
              </div>
-		</div>       
+		</div>  
+		
 	</div>
+
 
 	
 

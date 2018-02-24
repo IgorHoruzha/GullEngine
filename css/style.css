@@ -10,6 +10,11 @@ body{
     width: 165px;
     left: calc(50% - 83px);
 }
+ @media screen and (max-device-width: 620px) {
+    #logo {
+    	top: 10px;;
+    }
+   }
 #siteBody{
 	margin-top: 3%;
 }
@@ -78,10 +83,16 @@ body{
 	transition: all 0.5s;
 	background-color:  rgb(194, 143, 148);
 }
+ @media screen and (max-device-width: 620px) {
+    .socialImg {
+    	float: left;
+    }
+ }
 .inactive{
 	color:rgb(179, 106, 121);
 	transition: all 0.5s;
 	border-color: rgb(179, 106, 121);
 }
+
 
 
