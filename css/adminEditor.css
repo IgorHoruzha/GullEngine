@@ -1,0 +1,30 @@
+#addMenu{
+	cursor: pointer;
+}
+#addMenu:hover{
+	background-color: #28a745;
+}
+ @media screen and (max-device-width: 620px) {
+    #addMenu {
+    	float: right;
+    }
+ }
+#addSocial{
+	cursor: pointer;
+}
+#addSocial:hover{
+    background-color: #28a745;
+}
+#editCopyrite{
+	padding: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
+    margin-right: 10px;
+}
+#editLogo{
+	position: absolute;
+    top: 7%;
+    left: calc(50% + 90px);
+}
+
+
