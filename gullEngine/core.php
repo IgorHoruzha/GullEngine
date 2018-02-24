@@ -1,10 +1,12 @@
 <?php
-   
+
    //возвращает хедер !
    //принимает 0 для обычного режима и 1 для админ мода
 	function siteHeader($mode){
 
-      if($mode=="0"){
+      if($mode==0){
+
+
         return '<!DOCTYPE html>
                 <html lang="en">
                 <head>
@@ -23,7 +25,6 @@
                 </head>';
       }
       else{
-
         return '
                     <!DOCTYPE html>
                       <html lang="en">
