@@ -36,7 +36,7 @@
     //текст для копирайтинга
     $cpy = "Copyright © 2017";
 
-    //поехали!
-    FullAsembly($logo, $menuArray, $cpy, $footArray, 0);
+   //поехали!
+   FullAsembly($logo, $menuArray,$cpy, $footArray,0,0);
 
 ?>
