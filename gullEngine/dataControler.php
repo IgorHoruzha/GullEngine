@@ -201,10 +201,10 @@
   }
   function readCopyr($mod){
         if($mod==0){
-            $file = 'Design.txt';
+            $file = 'Cpyriting.txt';
         }
         else{
-        	$file = '../Design.txt';
+        	$file = '../Cpyriting.txt';
         }
         $current = file_get_contents($file);
         return $current; 
