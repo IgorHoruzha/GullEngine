@@ -145,7 +145,7 @@
 	                            break;
 	                    }
 	                    $modStr='';
-	                    if($mod==0){
+	                    if($mod==0 || $name=="link"){
 	                        $modStr='';
 	                    }
 	                    else{
@@ -159,5 +159,54 @@
 	            return  $footArray;
 	    }
 	     mysqli_close($link);
+  }
+
+   function addLogo($content){
+	    $text = $content;
+	 
+		// открываем файл, если файл не существует,
+		//делается попытка создать его
+		$fp = fopen("Design.txt", "w");
+		 
+		// записываем в файл текст
+		fwrite($fp, $text);	 
+		// закрываем
+		fclose($fp);
+  } 
+
+  function readLogo($mod){
+        if($mod==0){
+            $file = 'Design.txt';
+        }
+        else{
+        	$file = '../Design.txt';
+        }
+      
+		
+  	
+// Открываем файл для получения существующего содержимого
+        $current = file_get_contents($file);
+        if($mod==0){
+        	return $current;
+        }
+        else{
+        	return '../'.$current;
+        }
+  }
+  function setCopyr($cpy){          
+        $text = $cpy;
+        $fp = fopen("/Cpyriting.txt", "w");
+        fwrite($fp, $text);	 
+		fclose($fp);
+  }
+  function readCopyr($mod){
+        if($mod==0){
+            $file = 'Design.txt';
+        }
+        else{
+        	$file = '../Design.txt';
+        }
+        $current = file_get_contents($file);
+        return $current; 
   }
 ?>

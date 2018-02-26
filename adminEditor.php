@@ -1,21 +1,20 @@
 <?php
 
+
 session_start();
+include 'gullEngine/dataControler.php';
 require_once('gullEngine/core.php');
 //лого
-$logo ='../image/logo.png';
+$logo= readLogo(1);
 //пункты менюшки
-$menuArray[0] = array("name"=>"Home","link"=>"https://www.google.com.ua");
-$menuArray[1] = array("name"=>"Page 1","link"=>"https://www.google.com.ua");
-$menuArray[2] = array("name"=>"Page 2","link"=>"https://www.google.com.ua");
-
-// картинки с соцсетями в футере
-$footArray[0] = array("link"=>"https://vk.com","image"=>"../image/socialImages/vk.png");
-$footArray[1] = array("link"=>"https://www.facebook.com","image"=>"../image/socialImages/facebook.png");
-$footArray[2] = array("link"=>"https://twitter.com","image"=>"../image/socialImages/twiter.png");
+$menuArray=readMenuButton();
+//контент
+$content=readContent(4);
 //текст для копирайтинга
-$cpy = "Copyright © 2018";
-$content ='<iframe width="640" height="360" src="https://www.youtube.com/embed/z5El-yYNUwU" frameborder="0" allowfullscreen></iframe>';
+$cpy=readCopyr(1);
+//футер
+$footArray=readFooter(1);
+
 //поехали!
  FullAsembly($logo, $menuArray, $cpy,$content,$footArray, 0, 1);
 

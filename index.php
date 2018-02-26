@@ -1,23 +1,31 @@
 <?php
     include 'gullEngine/core.php';
     include 'gullEngine/dataControler.php';
-    //пункты менюшки
-    $menuArray = [];  
-    //лого
-    $logo ='../image/logo.png';
-    //поехали!
-     
-     $menuArray=readMenuButton();
-     $footArray=readFooter(0);
-     $content=readContent(4);
 
-     FullAsembly($logo, $menuArray, $cpy, $content, $footArray, 0, 0);
+
+         //лого
+    $logo= readLogo(0);
+    //пункты менюшки
+    $menuArray=readMenuButton();
+    //контент
+    $content=readContent(4);
+    //текст для копирайтинга
+    $cpy=readCopyr(0);
+    //футер
+    $footArray=readFooter(0);
+
+    FullAsembly($logo, $menuArray, $cpy, $content, $footArray, 0, 0);
+     
+
+
+
 
     foreach ($_POST as $key=>$value){
         if($key=='menuButtonInfo'){
             $tmpObj = $value;
         }
     }
+
     $mButton= $tmpObj;
     echo $mButton;
      

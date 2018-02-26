@@ -1,5 +1,7 @@
  футер
 /*
+ $logo ='../image/logo.png';
+ 
      addToFoote('image/socialImages/vk.png','https://vk.com');
       addToFoote('image/socialImages/facebook.png','https://www.facebook.com');
        addToFoote('image/socialImages/twiter.png','https://twitter.com');
