@@ -97,6 +97,8 @@ html{
 	transition: all 0.5s;
 	border-color: rgb(179, 106, 121);
 }
-
+#socialLinkInput{
+   margin-top: 15px;
+}
 
 

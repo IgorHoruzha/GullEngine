@@ -20,7 +20,7 @@
   function readMenuButton(){
 	  	$link = mysqli_connect('localhost','root','','GullDataBase') 
 	        or die("Ошибка " . mysqli_error($link)); 
-	    $query ="SELECT * FROM MenuButtons";
+	    $query ="SELECT NAME FROM MenuButtons";
 	    $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
 	    if($result)
 	    {
@@ -78,27 +78,28 @@
       
        	$link = mysqli_connect('localhost','root','','GullDataBase') 
 	        or die("Ошибка " . mysqli_error($link)); 
-	    $query ="SELECT * FROM content";
-	    $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
-	    if($result)
-	    {
-	    	    $content;
-	            $counts = mysqli_num_rows($result);
-	            for ($i=0; $i <  $counts; $i++) { 
-	               $row = mysqli_fetch_row($result);
-	               $colum =0;
-	               foreach ($row as $key => $value) {
-	                    
-	                    if($i==$indx){
-                          $content=$modStr.$row[$colum];
-                        }
-	                    $colum++;	                   
-	               }
+	    $query ="SELECT LINING FROM Content WHERE MENU_ID={$indx}";
+	    $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link));
+//	    if($result)
+//	    {
+//	    	    $content;
+//	            $counts = mysqli_num_rows($result);
+//	            for ($i=0; $i <  $counts; $i++) {
+//	               $row = mysqli_fetch_row($result);
+//	               $colum =0;
+//	               foreach ($row as $key => $value) {
+//
+//	                    if($i==$indx){
+//                          $content=$modStr.$row[$colum];
+//                        }
+//	                    $colum++;
+//	               }
+//
+//	            }
+//	            mysqli_free_result($result);
+        //TODO: NEED Checking Checking here
+      return  $result->fetch_all()[0][0];
 
-	            }
-	            mysqli_free_result($result);
-	            return  $content;
-	    }
   }
 
   //добавить в футер буттон
@@ -162,8 +163,7 @@
   }
 
    function addLogo($content){
-	    $text = $content;
-	 
+	    $text = $content;	 
 		// открываем файл, если файл не существует,
 		//делается попытка создать его
 		$fp = fopen("Design.txt", "w");
@@ -180,10 +180,7 @@
         }
         else{
         	$file = '../Design.txt';
-        }
-      
-		
-  	
+        } 	
 // Открываем файл для получения существующего содержимого
         $current = file_get_contents($file);
         if($mod==0){

@@ -73,8 +73,10 @@
 			      </li>';
             }
             else{
+                //TODO: HERE  WILLBE  <a class="nav-link" href="' . $value["link"] . '"><span>' . $value["name"] . '</span></a>
                 $rt .= '<li class="nav-item active">
-			        <a class="nav-link" href="' . $value["link"] . '"><span>' . $value["name"] . '</span></a>
+
+			       <a class="nav-link" href="#"><span>' . $value["name"] . '</span></a>
 			      </li>';
             }
             $counter++;
@@ -134,7 +136,7 @@
                           <input type="text" class="form-control" placeholder="You copyright" id="copyrightInput">
                       </div>
                       <div class="modal-footer">
-                          <button type="button" class="btn btn-primary">Save changes</button>
+                          <button id ="changeCopyright" type="button" class="btn btn-primary">Save changes</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       </div>
                   </div>
@@ -145,7 +147,7 @@
               <div class="modal-dialog" role="document">
                   <div class="modal-content">
                       <div class="modal-header">
-                          <h5 class="modal-title">Enter copyright</h5>
+                          <h5 class="modal-title">Select logo</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                           </button>
@@ -154,7 +156,7 @@
                           <input type="file" class="form-control" name="attachment" id="logoImage">
                       </div>
                       <div class="modal-footer">
-                          <button type="button" class="btn btn-primary">Save changes</button>
+                          <button id ="changeLogo" type="button" class="btn btn-primary">Save changes</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       </div>
                   </div>
@@ -165,17 +167,21 @@
               <div class="modal-dialog" role="document">
                   <div class="modal-content">
                       <div class="modal-header">
-                          <h5 class="modal-title">Enter copyright</h5>
+                          <h5 class="modal-title">Enter social button options</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                           </button>
                       </div>
                       <div class="modal-body">
-                           <input type="file" class="form-control" name="attachment" id="socialImage">
-                           <input type="text" class="form-control" placeholder="Social Link" id="menuLinkInput">
+                           
+
+                           <input type="file" name="file" class="form-control" multiple="true" 
+                             accept="image/jpeg,image/gif,image/x-png" id="socialImage" value="Обзор"/>
+
+                           <input type="text" class="form-control" placeholder="Social Link" id="socialLinkInput">
                       </div>
                       <div class="modal-footer">
-                          <button type="button" class="btn btn-primary">Save changes</button>
+                          <button id ="appendSocial" type="button" class="btn btn-primary">Save changes</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       </div>
                   </div>
@@ -187,7 +193,7 @@
               <div class="modal-dialog" role="document">
                   <div class="modal-content">
                       <div class="modal-header">
-                          <h5 class="modal-title">Enter copyright</h5>
+                          <h5 class="modal-title">Enter menu options</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                           </button>
@@ -197,7 +203,7 @@
                           <input type="text" class="form-control" placeholder="Menu Link" id="menuLinkInput">
                       </div>
                       <div class="modal-footer">
-                          <button type="button" class="btn btn-primary">Save changes</button>
+                          <button id ="appendMenuButtons" type="button" class="btn btn-primary">Save changes</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       </div>
                   </div>
