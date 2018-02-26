@@ -4,7 +4,7 @@
    //принимает 0 для обычного режима и 1 для админ мода
 	function siteHeader($mode){
 
-      if($mode==0){
+      if($mode=='0'){
 
 
         return '<!DOCTYPE html>

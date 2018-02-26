@@ -14,9 +14,9 @@ $footArray[0] = array("link"=>"https://vk.com","image"=>"../image/socialImages/v
 $footArray[1] = array("link"=>"https://www.facebook.com","image"=>"../image/socialImages/facebook.png");
 $footArray[2] = array("link"=>"https://twitter.com","image"=>"../image/socialImages/twiter.png");
 //текст для копирайтинга
-$cpy = "Copyright © 2017";
-
+$cpy = "Copyright © 2018";
+$content ='<iframe width="640" height="360" src="https://www.youtube.com/embed/z5El-yYNUwU" frameborder="0" allowfullscreen></iframe>';
 //поехали!
-FullAsembly($logo, $menuArray,$cpy, $footArray,0,'1');
+ FullAsembly($logo, $menuArray, $cpy,$content,$footArray, 0, 1);
 
 ?>
