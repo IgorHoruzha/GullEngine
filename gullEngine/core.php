@@ -73,8 +73,10 @@
 			      </li>';
             }
             else{
+                //TODO: HERE  WILLBE  <a class="nav-link" href="' . $value["link"] . '"><span>' . $value["name"] . '</span></a>
                 $rt .= '<li class="nav-item active">
-			        <a class="nav-link" href="' . $value["link"] . '"><span>' . $value["name"] . '</span></a>
+
+			       <a class="nav-link" href="#"><span>' . $value["name"] . '</span></a>
 			      </li>';
             }
             $counter++;
