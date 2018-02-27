@@ -54,9 +54,66 @@ $footArray=readFooter(1);
         var sLink=$('#socialLinkInput').val();
         var imgPath=$('#socialLinkInput').val();
     });
-    $('#changeLogo').click(function (e) {
-        var imgPath=$('#logoImage').val();
-        alert(imgPath);
+
+
+
+
+    $('#logoImage').on('change', function(){
+        files = this.files;
+    });
+    $('#changeLogo').click(function( event ){
+   
+   
+            // ничего не делаем если files пустой
+            if( typeof files == 'undefined' ) return;
+            
+            // создадим объект данных формы
+            var data = new FormData();
+
+            // заполняем объект данных файлами в подходящем для отправки формате
+            $.each( files, function( key, value ){
+                data.append( key, value );
+            });
+
+            // добавим переменную для идентификации запроса
+            data.append( 'my_file_upload', 1 );
+
+            // AJAX запрос
+            $.ajax({
+                url         : '../tmpPhpServer.php',
+                type        : 'POST', // важно!
+                data        : data,
+                cache       : false,
+                dataType    : 'json',
+                // отключаем обработку передаваемых данных, пусть передаются как есть
+                processData : false,
+                // отключаем установку заголовка типа запроса. Так jQuery скажет серверу что это строковой запрос
+                contentType : false, 
+                // функция успешного ответа сервера
+                success     : function( respond, status, jqXHR ){
+
+                    // ОК - файлы загружены
+                    if( typeof respond.error === 'undefined' ){
+                        // выведем пути загруженных файлов в блок '.ajax-reply'
+                        var files_path = respond.files;
+                        var html = '';
+                        $.each( files_path, function( key, val ){
+                             html += val +'<br>';
+                        } )
+
+                        $('.ajax-reply').html( html );
+                    }
+                    // ошибка
+                    else {
+                        console.log('ОШИБКА: ' + respond.error );
+                    }
+                },
+                // функция ошибки ответа сервера
+                error: function( jqXHR, status, errorThrown ){
+                    console.log( 'ОШИБКА AJAX запроса: ' + status, jqXHR );
+                }
+
+            });
     });
 
     //работает
@@ -72,7 +129,7 @@ $footArray=readFooter(1);
         }
         $.post("../tmpPhpServer.php", strReqest, getServerAnswer, "HTML");
     });
-    
+
    //работает
     $('#appendMenuButtons').click(function (e) {
         var mName=$('#menuNameInput').val();
@@ -91,5 +148,20 @@ $footArray=readFooter(1);
 
     });
   
+
+</script>
+
+<script type="text/javascript">
+    
+
+
+
+
+
+
+
+
+
+
 
 </script>

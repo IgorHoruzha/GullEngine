@@ -142,7 +142,7 @@
                           <input type="file" class="form-control" name="attachment" id="logoImage">
                       </div>
                       <div class="modal-footer">
-                          <button id ="changeLogo" type="button" class="btn btn-primary">Save changes</button>
+                           <button id ="changeLogo" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       </div>
                   </div>
