@@ -3,7 +3,7 @@ body{
    background-image:url(../image/background.jpg);
    background-repeat: no-repeat; 
    height: fit-content;
-
+   
 }
 html{
 	 height: fit-content;
@@ -97,6 +97,8 @@ html{
 	transition: all 0.5s;
 	border-color: rgb(179, 106, 121);
 }
-
+#socialLinkInput{
+   margin-top: 15px;
+}
 
 

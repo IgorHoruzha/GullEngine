@@ -3,29 +3,17 @@
    //возвращает хедер !
    //принимает 0 для обычного режима и 1 для админ мода
 	function siteHeader($mode){
-
+      
+      $bousIncludes='';
+      $modeText='';
       if($mode=='0'){
-
-
-        return '<!DOCTYPE html>
-                <html lang="en">
-                <head>
-
-                    <meta charset="UTF-8">
-                    <title>gullPreviev</title>
-
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <link rel="icon" type="image/png" href="image/favicon.png" />
-                    <link href="css/bootstrap.min.css" rel="stylesheet">
-                    <link href="css/style.css" rel="stylesheet">
-
-                    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-                    <script src="js/bootstrap.min.js"></script>
-
-                </head>';
+        $modeText=''; 
       }
       else{
-        return '
+        $modeText='../';
+        $bousIncludes.='<link href="../css/adminEditor.css" rel="stylesheet">';
+      }
+       return '
                     <!DOCTYPE html>
                       <html lang="en">
                       <head>
@@ -33,21 +21,19 @@
                           <meta charset="UTF-8">
                           <title>gullPreviev</title>
 
-                          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                          <link rel="icon" type="image/png" href="../image/favicon.png" />
-                          <link href="../css/bootstrap.min.css" rel="stylesheet">
-                          <link href="../css/style.css" rel="stylesheet">
-                          <link href="../css/adminEditor.css" rel="stylesheet">
-                          <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
-                          <script src="../js/bootstrap.min.js"></script>
-                      </head>';
-      }
+                          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                          <link rel="icon" type="image/png" href="'.$modeText.'image/favicon.png" />
+                          <link href="'.$modeText.'css/bootstrap.min.css" rel="stylesheet">
+                          <link href="'.$modeText.'css/style.css" rel="stylesheet">
 
+                          <script type="text/javascript" src="'.$modeText.'js/jquery-3.3.1.min.js"></script>
+                          <script src="'.$modeText.'js/bootstrap.min.js"></script>
+                          '.$bousIncludes.'
+                      </head>';
 	}
 
 	//возврашает логотип сайта
     function setLogo($logoSrc,$mode){
-
 	    if($mode=='1'){
             $rt='<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#logoEditModale"  data-whatever="@mdo" id="editLogo">Edit</button>';
         }
@@ -136,7 +122,7 @@
                           <input type="text" class="form-control" placeholder="You copyright" id="copyrightInput">
                       </div>
                       <div class="modal-footer">
-                          <button type="button" class="btn btn-primary">Save changes</button>
+                          <button id ="changeCopyright" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       </div>
                   </div>
@@ -147,7 +133,7 @@
               <div class="modal-dialog" role="document">
                   <div class="modal-content">
                       <div class="modal-header">
-                          <h5 class="modal-title">Enter copyright</h5>
+                          <h5 class="modal-title">Select logo</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                           </button>
@@ -156,7 +142,7 @@
                           <input type="file" class="form-control" name="attachment" id="logoImage">
                       </div>
                       <div class="modal-footer">
-                          <button type="button" class="btn btn-primary">Save changes</button>
+                           <button id ="changeLogo" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       </div>
                   </div>
@@ -167,17 +153,21 @@
               <div class="modal-dialog" role="document">
                   <div class="modal-content">
                       <div class="modal-header">
-                          <h5 class="modal-title">Enter copyright</h5>
+                          <h5 class="modal-title">Enter social button options</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                           </button>
                       </div>
                       <div class="modal-body">
-                           <input type="file" class="form-control" name="attachment" id="socialImage">
-                           <input type="text" class="form-control" placeholder="Social Link" id="menuLinkInput">
+                           
+
+                           <input type="file" name="file" class="form-control" multiple="true" 
+                             accept="image/jpeg,image/gif,image/x-png" id="socialImage" value="Обзор"/>
+
+                           <input type="text" class="form-control" placeholder="Social Link" id="socialLinkInput">
                       </div>
                       <div class="modal-footer">
-                          <button type="button" class="btn btn-primary">Save changes</button>
+                          <button id ="appendSocial" type="button" class="btn btn-primary">Save changes</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       </div>
                   </div>
@@ -189,17 +179,17 @@
               <div class="modal-dialog" role="document">
                   <div class="modal-content">
                       <div class="modal-header">
-                          <h5 class="modal-title">Enter copyright</h5>
+                          <h5 class="modal-title">Enter menu options</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                           </button>
                       </div>
                       <div class="modal-body">
-                          <input type="text" class="form-control" placeholder="Menu Name" id="menuLinkInput">
-                          <input type="text" class="form-control" placeholder="Menu Link" id="menuLinkInput">
+                          <input type="text" class="form-control" placeholder="Menu Name" id="menuNameInput">
+                          <textarea type="text" class="form-control" placeholder="Menu Content" id="menuLinkInput"></textarea>
                       </div>
                       <div class="modal-footer">
-                          <button type="button" class="btn btn-primary">Save changes</button>
+                          <button id ="appendMenuButtons" type="button" class="btn btn-primary">Save changes</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       </div>
                   </div>
@@ -227,5 +217,7 @@
 	</body>
 	</html>';
    }
+
    
 ?>
+    
