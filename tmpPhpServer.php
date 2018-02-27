@@ -2,9 +2,7 @@
 include 'gullEngine/core.php';
 include 'gullEngine/dataControler.php';
 if(isset($_POST['reqObj'])) {
-     
      $obj= json_decode(($_POST['reqObj']));
-
      $link = mysqli_connect('localhost','root','','GullDataBase');    
      $query="SELECT ID FROM MenuButtons WHERE NAME ='{$obj->menuButton}'";
      $result = mysqli_query($link,$query) or die("Ошибка " . mysqli_error($link)); 
