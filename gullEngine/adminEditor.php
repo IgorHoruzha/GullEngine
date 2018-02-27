@@ -17,26 +17,39 @@ $footArray=readFooter(1);
 
 <script>
 
-    $('.nav-link').click(function (e) {
+       function menuEvent(){
+              $('.nav-link').click(function (e) {
 
-        var len = $('.nav-link').length;
-        var currentMenuButton;
-        //узнаю какая это кнопка из всех
-        for (var i = 0; i < len; i++) {
+                var currentMenuButton= $(e.currentTarget);    
+                function getServerAnswer(x) {
+                  $($('.navbar')[0]).replaceWith(x.menu);
+                  $('#siteContent').replaceWith(x.content);
+                  menuEvent();
+                }
+                
+                var cNumber=0;
+                for (var i = 0; i < $('.nav-link').length; i++) {
+                    if (e.target.innerText == $('.nav-link')[i].text) {
+                       cNumber = i;
+                    }
+                }
+                var obj = new function(){
+                    this.menuButton=currentMenuButton.children().text();
+                    this.number=cNumber;
+                    this.type=1;
+                }
+                var jr=JSON.stringify(obj);
+                var strReqest = {"reqObj":jr};
+                $.post("../tmpPhpServer.php",strReqest,getServerAnswer,"JSON");
+               
+            });
+      }
+      menuEvent();
 
-            if (e.target.innerText == $('.nav-link')[i].text) {
-                currentMenuButton = i;
-            }
-        }
-        function getServerAnswer(x) {
-          $('#siteContent').replaceWith(x);
-        }
-        var strReqest = {"reqObj": '' + currentMenuButton};
-        $.post("../tmpPhpServer.php", strReqest, getServerAnswer, "HTML");
-
-    });
-
-
+    function reqestObject(){
+            this.type;
+            this.value;
+    }
     $('#appendSocial').click(function (e) {
         var sLink=$('#socialLinkInput').val();
         var imgPath=$('#socialLinkInput').val();
@@ -45,13 +58,37 @@ $footArray=readFooter(1);
         var imgPath=$('#logoImage').val();
         alert(imgPath);
     });
+
+    //работает
     $('#changeCopyright').click(function (e) {
-        var cpyText=$('#copyrightInput').val();
- 
+        var cpyText=$('#copyrightInput').val();     
+        var editOb = new reqestObject();
+        editOb.type ='copyright';
+        editOb.value = cpyText;
+        var jsonEdit=JSON.stringify(editOb);
+        var strReqest = {"objectToAdd":jsonEdit};
+        function getServerAnswer(x) {
+          $('#copyrite').html('<button type="button" class="btn btn-warning"  data-toggle="modal" data-target="#copyrightModale"  data-whatever="@mdo" id="editCopyrite">Edit</button>'+x);
+        }
+        $.post("../tmpPhpServer.php", strReqest, getServerAnswer, "HTML");
     });
-    $('appendMenuButtons').click(function (e) {
-        var mName=$('#menuLinkInput').val();
+    
+   //работает
+    $('#appendMenuButtons').click(function (e) {
+        var mName=$('#menuNameInput').val();
         var mContent=$('#menuLinkInput').val();
+        var editOb = new reqestObject();
+
+        editOb.type ='munuButton';
+        editOb.name = mName;
+        editOb.content = mContent;
+        var jsonEdit=JSON.stringify(editOb);
+        var strReqest = {"objectToAdd":jsonEdit};
+        function getServerAnswer(x) {
+             console.log(x);
+        }
+        $.post("../tmpPhpServer.php", strReqest, getServerAnswer, "HTML");
+
     });
   
 

@@ -11,32 +11,40 @@ $content = readContent(0);
 $cpy = readCopyr(0);
 //футер
 $footArray = readFooter(0);
+
 FullAsembly($logo, $menuArray, $cpy, $content, $footArray, 0, 0);
 
 ?>
 
 <script>
 
-    $('.nav-link').click(function (e) {
+ function menuEvent(){
+      $('.nav-link').click(function (e) {
 
-
-        var len = $('.nav-link').length;
-        var currentMenuButton;
-        //узнаю какая это кнопка из всех
-        for (var i = 0; i < len; i++) {
+        var currentMenuButton= $(e.currentTarget);    
+        function getServerAnswer(x) {
+          $($('.navbar')[0]).replaceWith(x.menu);
+          $('#siteContent').replaceWith(x.content);
+          menuEvent();
+        }
+        
+        var cNumber=0;
+        for (var i = 0; i < $('.nav-link').length; i++) {
             if (e.target.innerText == $('.nav-link')[i].text) {
-                currentMenuButton = i;
+               cNumber = i;
             }
         }
-
-        function getServerAnswer(x) {
-          $('#siteContent').replaceWith(x);
+        var obj = new function(){
+        	this.menuButton=currentMenuButton.children().text();
+            this.number=cNumber;
+            this.type=0;
         }
-
-        var strReqest = {"reqObj": '' + currentMenuButton};
-        $.post("tmpPhpServer.php", strReqest, getServerAnswer, "HTML");
-
+        var jr=JSON.stringify(obj);
+        var strReqest = {"reqObj":jr};
+        $.post("tmpPhpServer.php",strReqest,getServerAnswer,"JSON");
+       
     });
-
+  }
+   menuEvent();
 
 </script>

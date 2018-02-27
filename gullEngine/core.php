@@ -3,29 +3,17 @@
    //возвращает хедер !
    //принимает 0 для обычного режима и 1 для админ мода
 	function siteHeader($mode){
-
+      
+      $bousIncludes='';
+      $modeText='';
       if($mode=='0'){
-
-
-        return '<!DOCTYPE html>
-                <html lang="en">
-                <head>
-
-                    <meta charset="UTF-8">
-                    <title>gullPreviev</title>
-
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <link rel="icon" type="image/png" href="image/favicon.png" />
-                    <link href="css/bootstrap.min.css" rel="stylesheet">
-                    <link href="css/style.css" rel="stylesheet">
-
-                    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-                    <script src="js/bootstrap.min.js"></script>
-
-                </head>';
+        $modeText=''; 
       }
       else{
-        return '
+        $modeText='../';
+        $bousIncludes.='<link href="../css/adminEditor.css" rel="stylesheet">';
+      }
+       return '
                     <!DOCTYPE html>
                       <html lang="en">
                       <head>
@@ -33,21 +21,19 @@
                           <meta charset="UTF-8">
                           <title>gullPreviev</title>
 
-                          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                          <link rel="icon" type="image/png" href="../image/favicon.png" />
-                          <link href="../css/bootstrap.min.css" rel="stylesheet">
-                          <link href="../css/style.css" rel="stylesheet">
-                          <link href="../css/adminEditor.css" rel="stylesheet">
-                          <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
-                          <script src="../js/bootstrap.min.js"></script>
-                      </head>';
-      }
+                          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                          <link rel="icon" type="image/png" href="'.$modeText.'image/favicon.png" />
+                          <link href="'.$modeText.'css/bootstrap.min.css" rel="stylesheet">
+                          <link href="'.$modeText.'css/style.css" rel="stylesheet">
 
+                          <script type="text/javascript" src="'.$modeText.'js/jquery-3.3.1.min.js"></script>
+                          <script src="'.$modeText.'js/bootstrap.min.js"></script>
+                          '.$bousIncludes.'
+                      </head>';
 	}
 
 	//возврашает логотип сайта
     function setLogo($logoSrc,$mode){
-
 	    if($mode=='1'){
             $rt='<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#logoEditModale"  data-whatever="@mdo" id="editLogo">Edit</button>';
         }
@@ -136,7 +122,7 @@
                           <input type="text" class="form-control" placeholder="You copyright" id="copyrightInput">
                       </div>
                       <div class="modal-footer">
-                          <button id ="changeCopyright" type="button" class="btn btn-primary">Save changes</button>
+                          <button id ="changeCopyright" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       </div>
                   </div>
@@ -199,8 +185,8 @@
                           </button>
                       </div>
                       <div class="modal-body">
-                          <input type="text" class="form-control" placeholder="Menu Name" id="menuLinkInput">
-                          <input type="text" class="form-control" placeholder="Menu Link" id="menuLinkInput">
+                          <input type="text" class="form-control" placeholder="Menu Name" id="menuNameInput">
+                          <textarea type="text" class="form-control" placeholder="Menu Content" id="menuLinkInput"></textarea>
                       </div>
                       <div class="modal-footer">
                           <button id ="appendMenuButtons" type="button" class="btn btn-primary">Save changes</button>
@@ -231,5 +217,7 @@
 	</body>
 	</html>';
    }
+
    
 ?>
+    

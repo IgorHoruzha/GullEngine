@@ -1,14 +1,15 @@
 <?php
 
- //добавить в футер буттон
-  function addmenuButton($name,$link){
+  //добавить кнопку меню в базу данных
+  function addmenuButton($id,$name,$link){
   	    $im=$name;
   	    $lin=$link;
+
   	    // подключаемся к серверу
 	    $link = mysqli_connect('localhost','root','','GullDataBase') 
 	        or die("Ошибка " . mysqli_error($link)); 
 	    // создание строки запроса
-	    $query ="INSERT INTO MenuButtons VALUES('$im','$lin')";
+	    $query ="INSERT INTO MenuButtons VALUES({$id},'$im','$lin')";
 	    // выполняем запрос
 	    $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
 	    if($result)
@@ -17,6 +18,7 @@
 	    }
 	    mysqli_close($link);
   }
+  //возврашает масив кнопок меню из базы
   function readMenuButton(){
 	  	$link = mysqli_connect('localhost','root','','GullDataBase') 
 	        or die("Ошибка " . mysqli_error($link)); 
@@ -58,13 +60,13 @@
 	    }
 	     mysqli_close($link);
   }
-
-  function addContent($content){
+  //добавляет контент в базу данных
+  function addContent($shId,$menuСhain,$content){
        // подключаемся к серверу
 	    $link = mysqli_connect('localhost','root','','GullDataBase') 
 	        or die("Ошибка " . mysqli_error($link)); 
 	    // создание строки запроса
-	    $query ="INSERT INTO content VALUES('$content')";
+	    $query ="INSERT INTO content VALUES({$shId},{$menuСhain},'$content')";
 	    // выполняем запрос
 	    $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
 	    if($result)
@@ -73,32 +75,15 @@
 	    }
 	    mysqli_close($link);
   } 
-
+   //возврашает контент из базы данных по индексу
   function readContent($indx){
       
        	$link = mysqli_connect('localhost','root','','GullDataBase') 
 	        or die("Ошибка " . mysqli_error($link)); 
 	    $query ="SELECT LINING FROM Content WHERE MENU_ID={$indx}";
 	    $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link));
-//	    if($result)
-//	    {
-//	    	    $content;
-//	            $counts = mysqli_num_rows($result);
-//	            for ($i=0; $i <  $counts; $i++) {
-//	               $row = mysqli_fetch_row($result);
-//	               $colum =0;
-//	               foreach ($row as $key => $value) {
-//
-//	                    if($i==$indx){
-//                          $content=$modStr.$row[$colum];
-//                        }
-//	                    $colum++;
-//	               }
-//
-//	            }
-//	            mysqli_free_result($result);
         //TODO: NEED Checking Checking here
-      return  $result->fetch_all()[0][0];
+         return  $result->fetch_all()[0][0];
 
   }
 
@@ -119,7 +104,7 @@
 	    }
 	    mysqli_close($link);
   }
-  //чтение футера и збазы данных
+  //чтение футера из базы данных
   function readFooter($mod){
 	  	$link = mysqli_connect('localhost','root','','GullDataBase') 
 	        or die("Ошибка " . mysqli_error($link)); 
@@ -161,7 +146,7 @@
 	    }
 	     mysqli_close($link);
   }
-
+   //перезаписывает путь к логотипу
    function addLogo($content){
 	    $text = $content;	 
 		// открываем файл, если файл не существует,
@@ -173,7 +158,7 @@
 		// закрываем
 		fclose($fp);
   } 
-
+   //возврашает путь к логотипу
   function readLogo($mod){
         if($mod==0){
             $file = 'Design.txt';
@@ -181,7 +166,7 @@
         else{
         	$file = '../Design.txt';
         } 	
-// Открываем файл для получения существующего содержимого
+        // Открываем файл для получения существующего содержимого
         $current = file_get_contents($file);
         if($mod==0){
         	return $current;
@@ -190,12 +175,14 @@
         	return '../'.$current;
         }
   }
+ //перезаписать текст копирайтинга 
   function setCopyr($cpy){          
         $text = $cpy;
-        $fp = fopen("/Cpyriting.txt", "w");
+        $fp = fopen("Cpyriting.txt", "w");
         fwrite($fp, $text);	 
 		fclose($fp);
   }
+  //возврашает текст копирайтинга
   function readCopyr($mod){
         if($mod==0){
             $file = 'Cpyriting.txt';
@@ -206,4 +193,6 @@
         $current = file_get_contents($file);
         return $current; 
   }
+
 ?>
+  
