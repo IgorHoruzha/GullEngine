@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 27 2018 г., 11:44
+-- Время создания: Фев 28 2018 г., 04:17
 -- Версия сервера: 5.6.37
--- Версия PHP: 7.1.7
+-- Версия PHP: 7.0.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -72,17 +72,18 @@ INSERT INTO `FooterButons` (`img`, `link`) VALUES
 CREATE TABLE `MenuButtons` (
   `ID` int(11) NOT NULL,
   `NAME` varchar(50) NOT NULL,
-  `LINK` varchar(50) NOT NULL
+  `LINK` varchar(50) NOT NULL,
+  `priority` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `MenuButtons`
 --
 
-INSERT INTO `MenuButtons` (`ID`, `NAME`, `LINK`) VALUES
-(0, 'Home', '?id=Home'),
-(1, 'Video', '?id=Video'),
-(2, 'Loream', '?id=Loream');
+INSERT INTO `MenuButtons` (`ID`, `NAME`, `LINK`, `priority`) VALUES
+(0, 'Home', '?id=Home', 0),
+(1, 'Video', '?id=Video', 2),
+(2, 'Loream', '?id=Loream', 1);
 
 --
 -- Индексы сохранённых таблиц

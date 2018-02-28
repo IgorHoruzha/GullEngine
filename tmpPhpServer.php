@@ -1,11 +1,14 @@
 <?php
+
+///!!! ПРОСТО СЕРВЕР !!!
 include 'gullEngine/core.php';
 include 'gullEngine/dataControler.php';
 if(isset($_POST['reqObj'])) {
      $obj= json_decode(($_POST['reqObj']));
      $link = mysqli_connect('localhost','root','','GullDataBase');    
      $query="SELECT ID FROM MenuButtons WHERE NAME ='{$obj->menuButton}'";
-     $result = mysqli_query($link,$query) or die("Ошибка " . mysqli_error($link)); 
+     $result = mysqli_query($link,$query) or die("Ошибка " . mysqli_error($link));
+
      $menuId=$result->fetch_all()[0][0];
      mysqli_close($link);
      $toBack = new class {
@@ -32,23 +35,31 @@ if(isset($_POST['objectToAdd'])) {
      		break;
         //редакт мню
      	case 'munuButton':{
-            $link = mysqli_connect('localhost','root','','GullDataBase');
-	      
-	        $query='SELECT ID FROM MenuButtons ORDER BY ID DESC LIMIT 1';
-	        $result = mysqli_query($link,$query) or die("Ошибка " . mysqli_error($link)); 
-            
-            $menuId=$result->fetch_all()[0][0]+1;
+            	      
+	        $query='SELECT ID FROM MenuButtons ORDER BY ID DESC LIMIT 1';           
+            $menuId=DateBaseQuery($query)->fetch_all()[0][0]+1;
 
-            addmenuButton($menuId,$editParams->name,'?id='.$editParams->name);
+            $query='SELECT priority FROM MenuButtons ORDER BY priority DESC LIMIT 1';
+            $menuPriority=DateBaseQuery($query)->fetch_all()[0][0]+1;
+            addmenuButton($menuId,$editParams->name,'?id='.$editParams->name,$menuPriority);
 
             $query='SELECT ID FROM Content ORDER BY ID DESC LIMIT 1';
-	        $result = mysqli_query($link,$query) or die("Ошибка " . mysqli_error($link));
+	        $contentId=DateBaseQuery($query)->fetch_all()[0][0]+1;
 
-            mysqli_close($link);
-            $contentId=$result->fetch_all()[0][0]+1;
-            addContent($contentId,$menuId,$editParams->content);
-            mysqli_close($link);
-            echo (AssemblyMenu(readFooter(0), $contentId,0));                
+            addContent($contentId,$menuId,$editParams->content,$menuId);
+           
+             
+                  $toBack = new class {
+                    public $menu ="";
+                    public $content ="";
+                    public $type ="";
+                 };
+
+             $toBack->menu = AssemblyMenu(readMenuButton(),$contentId,1);
+             $toBack->content = AssemblyContent(readContent($menuId));
+             $toBack->type =  $obj->type;
+             echo  json_encode($toBack);
+                    
      	}
      		break;
      	default:
@@ -56,23 +67,43 @@ if(isset($_POST['objectToAdd'])) {
      }
 }
 
-if( isset( $_POST['my_file_upload'] ) ){  
-    // ВАЖНО! тут должны быть все проверки безопасности передавемых файлов и вывести ошибки если нужно
+if( isset( $_POST['changeLogoFile'] ) ){  
 
-    $uploaddir = './image'; // . - текущая папка где находится submit.php
-    // cоздадим папку если её нет
+    $uploaddir = './image';
     $files      = $_FILES; // полученные файлы
-    $done_files = array();
-    // переместим файлы из временной директории в указанную
-    foreach( $files as $file ){
-        $file_name = 'logo.png';
-        if( move_uploaded_file( $file['tmp_name'], "$uploaddir/$file_name" ) ){
-            $done_files[] = realpath( "$uploaddir/$file_name" );
-        }
-    }
-    $data = $done_files ? array('files' => $done_files ) : array('error' => 'Ошибка загрузки файлов.');
+    $file_name ='logo.png';
+
+    move_uploaded_file( $files[0]['tmp_name'],"$uploaddir/$file_name" );
+    
+    $data =  array('files' => 'teeeest');
     die( json_encode( $data ) );
 }
 
+if( isset( $_POST['addSocialFile'] ) ){  
+
+    $uploaddir = './image/socialImages';
+    $files = $_FILES;
+    addToFooter('image/socialImages/'.$files[0]['name'],$_POST['socialImageLink']);
+    
+    $file_name =$files[0]['name'];
+    move_uploaded_file( $files[0]['tmp_name'],"$uploaddir/$file_name" );   
+    $test = AssemblyFooter(readFooter(1),readCopyr(1),1);
+    $data =  array('files' => $test);
+    echo json_encode( $data );
+}
+
+
+if( isset( $_POST['changeBackgroundFile'] ) ){  
+
+    $uploaddir = './image';
+    $files      = $_FILES; // полученные файлы
+    $file_name ='background.jpg';
+
+    move_uploaded_file( $files[0]['tmp_name'],"$uploaddir/$file_name" );
+
+    $data =  array('files' => 'teeeest');
+    die( json_encode( $data ) );
+}
+?>
 
 

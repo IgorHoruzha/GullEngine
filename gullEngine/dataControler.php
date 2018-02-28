@@ -1,5 +1,5 @@
 <?php
-//TODO: Maybe host user and password add as parameters;
+//!!! Набо функций чтения и записи в базу данных
 function DateBaseQuery($query)
 {
     $link = mysqli_connect('localhost', 'root', '', 'GullDataBase')
@@ -15,26 +15,25 @@ function SelectModIfNeed($text, $mod)
     if ($mod) {
         return  $text='../'.$text;
     }
+	else{
+		return  $text;
+	}
 }
 
 //добавить кнопку меню в базу данных
-function addmenuButton($id, $name, $link)
+function addmenuButton($id, $name, $link,$priority)
 {
-    $result = DateBaseQuery("INSERT INTO MenuButtons VALUES('{$id}','{$name}','{$link}')");
-    if ($result) {
-        echo "<span style='color:blue;'>Данные добавлены</span>";
-    }
+    DateBaseQuery("INSERT INTO MenuButtons VALUES('{$id}','{$name}','{$link}','{$priority}')");
 }
 
 //возврашает масив кнопок меню из базы
 function readMenuButton()
 {
-    $result = DateBaseQuery("SELECT NAME FROM MenuButtons");
+    $result = DateBaseQuery("SELECT NAME FROM MenuButtons ORDER BY priority ASC ");
     if ($result) {
         $footArray = [];
         $counts = mysqli_num_rows($result);
         for ($i = 0, $colum = 0; $i < $counts; $i++, $colum++) {
-            //TODO: MAYBE TOGLE MOD HERE    if ($mod == 0) {      $modStr = '';    } else {    $modStr = '../';            }
             $footArray[$i]['name'] = mysqli_fetch_row($result)[0];
         }
         return $footArray;
@@ -44,10 +43,7 @@ function readMenuButton()
 //добавляет контент в базу данных
 function addContent($shId, $menuСhain, $content)
 {
-    $result = DateBaseQuery("INSERT INTO content VALUES('{$shId}','{$menuСhain}','{$content}')");
-    if ($result) {
-        echo "<span style='color:blue;'>Данные {$result}добавлены</span>";
-    }
+    DateBaseQuery("INSERT INTO content VALUES('{$shId}','{$menuСhain}','{$content}')");
 }
 
 //возврашает контент из базы данных по индексу
@@ -58,12 +54,9 @@ function readContent($indx)
 }
 
 //добавить в футер буттон
-function addToFooter($img, $link)
+function addToFooter($img,$link)
 {
-    $result = DateBaseQuery("INSERT INTO FooterButons VALUES('{$img}','{$link}')");
-    if ($result) {
-        echo "<span style='color:blue;'>Данные добавлены</span>";
-    }
+    DateBaseQuery("INSERT INTO FooterButons VALUES('{$img}','{$link}')");
 }
 
 //чтение футера из базы данных
@@ -90,21 +83,6 @@ function WriteInFile($fileName, $content)
     fwrite($fp, $content); // записываем в файл текст
     fclose($fp);  // закрываем
 }
-
-//перезаписывает путь к логотипу
-function addLogo($content)
-{
-    WriteInFile("Design.txt", $content);
-}
-
-//возврашает путь к логотипу
-function readLogo($mod)
-{
-    $fileAdress= SelectModIfNeed('Design.txt',$mod);
-    $current = file_get_contents($fileAdress);   // Открываем файл для получения существующего содержимого
-    return SelectModIfNeed($current,$mod);
-}
-
 //перезаписать текст копирайтинга
 function setCopyr($cpy)
 {
@@ -113,7 +91,7 @@ function setCopyr($cpy)
 
 //возврашает текст копирайтинга
 function readCopyr($mod)
-{
+{    
     $fileAdress= SelectModIfNeed('Cpyriting.txt',$mod);
     $current = file_get_contents($fileAdress);
     return $current;

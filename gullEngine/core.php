@@ -1,14 +1,16 @@
 <?php
-
+///!!! Набор функций собирающий разные блоки сайта по входным параметрам !!!
    //возвращает хедер !
    //принимает 0 для обычного режима и 1 для админ мода
 	function siteHeader($mode){
       
       $bousIncludes='';
       $modeText='';
+	  
       if($mode=='0'){
         $modeText=''; 
       }
+	  
       else{
         $modeText='../';
         $bousIncludes.='<link href="../css/adminEditor.css" rel="stylesheet">';
@@ -20,11 +22,13 @@
 
                           <meta charset="UTF-8">
                           <title>gullPreviev</title>
+                          <script src="'.$modeText.'js/GullEngine.js"></script>
+                          <link href="'.$modeText.'css/style.css" rel="stylesheet">
 
                           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
                           <link rel="icon" type="image/png" href="'.$modeText.'image/favicon.png" />
                           <link href="'.$modeText.'css/bootstrap.min.css" rel="stylesheet">
-                          <link href="'.$modeText.'css/style.css" rel="stylesheet">
+                         
 
                           <script type="text/javascript" src="'.$modeText.'js/jquery-3.3.1.min.js"></script>
                           <script src="'.$modeText.'js/bootstrap.min.js"></script>
@@ -60,7 +64,7 @@
             }
             else{
                 //TODO: HERE  WILLBE  <a class="nav-link" href="' . $value["link"] . '"><span>' . $value["name"] . '</span></a>
-                $rt .= '<li class="nav-item active">
+                $rt .= '<li class="nav-item active usageButton">
 
 			       <a class="nav-link" href="#"><span>' . $value["name"] . '</span></a>
 			      </li>';
@@ -149,6 +153,26 @@
             </div>
           </div>
 
+           <div class="modal"  id="backgroundEditModal"  tabindex="1" role="dialog">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title">Select Background</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <input type="file" class="form-control" name="attachment" id="backgroundImage">
+                      </div>
+                      <div class="modal-footer">
+                           <button id ="changeBackground" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                  </div>
+            </div>
+          </div>
+
           <div class="modal"  id="addSocialButton"  tabindex="2" role="dialog">
               <div class="modal-dialog" role="document">
                   <div class="modal-content">
@@ -167,7 +191,7 @@
                            <input type="text" class="form-control" placeholder="Social Link" id="socialLinkInput">
                       </div>
                       <div class="modal-footer">
-                          <button id ="appendSocial" type="button" class="btn btn-primary">Save changes</button>
+                          <button id ="appendSocial" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       </div>
                   </div>
@@ -189,7 +213,7 @@
                           <textarea type="text" class="form-control" placeholder="Menu Content" id="menuLinkInput"></textarea>
                       </div>
                       <div class="modal-footer">
-                          <button id ="appendMenuButtons" type="button" class="btn btn-primary">Save changes</button>
+                          <button id ="appendMenuButtons" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       </div>
                   </div>
@@ -205,6 +229,9 @@
    	 echo setLogo($logo,$mod);
 
    	 echo'<div  id="siteBody" class="container" >';
+     if($mod==1){
+     echo '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#backgroundEditModal"  data-whatever="@mdo" id="editBackground">Change Background</button>';
+     }
    	 echo AssemblyMenu($menuArray,$inactiveMeny,$mod);
 
    	 echo AssemblyContent($content);
@@ -214,6 +241,7 @@
       echo generateModal();
      }
    	 echo '	</div>
+
 	</body>
 	</html>';
    }
